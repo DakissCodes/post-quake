@@ -44,16 +44,16 @@ function createTimeStamp() {
     return formattedDateTime;
 
 }
-console.log('test branch here!')
 
 function fetchDataFromFirebase(referenceNode) {
     return new Promise((resolve, reject) => {
         onValue(referenceNode, (snapshot) => {
             let data = snapshot.val();
-
-            console.log('snapshot') 
+            
             // Resolve the promise with testData when data is fetched
+            console.log('data resolved!')
             resolve(data);
+            
         });
 
     });
@@ -75,7 +75,13 @@ function addElement(array, element) {
 }
 
 
+let accelerometerAXAxisArray = [0.0005, 0.3, 0.1, -0.2, -0.4, -0.6]
+let accelerometerAYAxisArray = [-0.1, 0.2, 0.4, -0.3, -0.5, -0.2]
+let accelerometerAZAxisArray = [0.3, 0.1, -0.2, -0.4, -0.6, -0.3]
 
+let accelerometerGXAxisArray = [0.02, 0.01, -0.03, -0.02, 0.04, 0.05]
+let accelerometerGYAxisArray = [-0.01, 0.03, 0.05, -0.01, -0.02, 0.03]
+let accelerometerGZAxisArray = [0.01, -0.02, 0.01, -0.03, 0.02, 0.01]
 
 // ACCELEROMETER DATA
 
@@ -93,41 +99,51 @@ const accelerometerZAxis = document.getElementById('az');
 // });
 
 
-// console.log(formattedDateTime)
 // Call the function to fetch data and use it
 // data in .then is testData
-fetchDataFromFirebase(accelerometerRef).then((data) => {
-    // fetching accelerometer data
-    console.log('data change!')
-    accelerometerData = {
-        xAxis: data.ax,
-        yAxis: data.ay,
-        zAxis: data.az
-    }
-    
-    addElement(timeStamps, createTimeStamp());
-    console.log(timeStamps)
-    accelerometerChart.update();
-    // assign axis values
-    accelerometerXAxis.textContent = accelerometerData.xAxis;
-    accelerometerYAxis.textContent = accelerometerData.yAxis;
-    accelerometerZAxis.textContent = accelerometerData.zAxis;
-    
-    
-        
-    // This executes after data has been fetched
-}).catch((error) => {
-    // if something goes wrong
-    console.error('Error fetching data:', error);
-    alert('Error fetching data');
-    accelerometerXAxis.textContent = '--';
-    accelerometerYAxis.textContent = '--';
-    accelerometerZAxis.textContent = '--';
-});
+// 
+onValue(accelerometerRef, (snapshot) => {
+    if (snapshot.exists()) {
+        fetchDataFromFirebase(accelerometerRef).then((data) => {
+            // fetching accelerometer data
+            console.log('accelerometer (data change)')
+
+            accelerometerData = {
+
+                xAxis: data.ax,
+                yAxis: data.ay,
+                zAxis: data.az
+            }
+            
+            addElement(accelerometerAXAxisArray, data.ax)
+            addElement(accelerometerAYAxisArray, data.ay)
+            addElement(accelerometerAZAxisArray, data.az)
+
+            
+            addElement(timeStamps, createTimeStamp());
+            console.log(timeStamps)
+            accelerometerChart.update();
+            // assign axis values
+            accelerometerXAxis.textContent = accelerometerData.xAxis;
+            accelerometerYAxis.textContent = accelerometerData.yAxis;
+            accelerometerZAxis.textContent = accelerometerData.zAxis;
+
+            // This executes after data has been fetched
+        }).catch((error) => {
+            // if something goes wrong
+            console.error('Error fetching data:', error);
+            alert('Error fetching data');
+            accelerometerXAxis.textContent = '--';
+            accelerometerYAxis.textContent = '--';
+            accelerometerZAxis.textContent = '--';
+        });
+       
+    } 
+
+})
+
 
 // GYROSCOPE DATA
-
-
 
 const gyroscopeRef = ref(db,'/earthquakeData/gyroscope')
 let gyroscopeData
@@ -136,35 +152,41 @@ const gyroscopeYAxis = document.getElementById('gy')
 const gyroscopeZAxis = document.getElementById('gz')
 
 
+onValue(gyroscopeRef, (snapshot) => {
 
-
-fetchDataFromFirebase(accelerometerRef).then((data) => {
-    
-    gyroscopeData = {
-        xAxis: data.ax,
-        yAxis: data.ay,
-        zAxis: data.az
+    if (snapshot.exists()) {
+        console.log('gyroscope data changed!')
+        fetchDataFromFirebase(gyroscopeRef).then((data) => {
+            gyroscopeData = {
+                xAxis: data.gx,
+                yAxis: data.gy,
+                zAxis: data.gz
+            }
+            
+            gyroscopeXAxis.textContent = gyroscopeData.xAxis;
+            gyroscopeYAxis.textContent = gyroscopeData.yAxis;
+            gyroscopeZAxis.textContent = gyroscopeData.zAxis;
+             
+            addElement(accelerometerGXAxisArray, data.gx)
+            addElement(accelerometerGYAxisArray, data.gy)
+            addElement(accelerometerGZAxisArray, data.gz)
+            addElement(timeStamps, createTimeStamp());
+            gyroscopeChart.update();
+            
+                
+        }).catch((error) => {
+            console.error('Error fetching data:', error);
+            alert('Error fetching data');
+            accelerometerXAxis.textContent = '--';
+            accelerometerYAxis.textContent = '--';
+            accelerometerZAxis.textContent = '--';
+            
+        });
     }
-    
-    
-    gyroscopeXAxis.textContent = gyroscopeData.xAxis;
-    gyroscopeYAxis.textContent = gyroscopeData.yAxis;
-    gyroscopeZAxis.textContent = gyroscopeData.zAxis;
-    
-    addElement(timeStamps, createTimeStamp());
-    console.log(timeStamps)
-    gyroscopeChart.update();
-    
-        
-}).catch((error) => {
-    console.error('Error fetching data:', error);
-    alert('Error fetching data');
-    accelerometerXAxis.textContent = '--';
-    accelerometerYAxis.textContent = '--';
-    accelerometerZAxis.textContent = '--';
-    
-});
 
+
+    
+})
 
 
 
@@ -182,19 +204,22 @@ let accelerometerChart = new Chart(accelerometerElement, {
         labels: timeStamps,
         datasets: [{
             label: 'X-axis',
-            data: [23, 19, 3, 5, 2, 3],
+            data: accelerometerAXAxisArray,
             borderWidth: 1,
+            backgroundColor: 'rgb(235, 113, 113)',
             
         },
         {
-            label: 'X-axis',
-            data: [23, 19, 3, 5, 2, 3],
-            borderWidth: 1
+            label: 'Y-axis',
+            data: accelerometerAYAxisArray,
+            borderWidth: 1,
+            backgroundColor: 'rgb(118, 218, 118)'
         },        
         {
             label: 'Z-axis',
-            data: [23, 19, 3, 5, 2, 3],
-            borderWidth: 1
+            data: accelerometerAZAxisArray,
+            borderWidth: 1,
+            backgroundColor: 'rgb(125, 125, 235)'
         }
     ]
     },
@@ -214,18 +239,22 @@ let gyroscopeChart = new Chart(gyroscopeElement, {
         labels: timeStamps,
         datasets: [{
             label: 'X-axis',
-            data: [23, 19, 3, 5, 2, 3],
-            borderWidth: 1
+            data: accelerometerGXAxisArray,
+            borderWidth: 1,
+            backgroundColor: 'rgb(235, 113, 113)',
         },
         {
-            label: 'X-axis',
-            data: [23, 19, 3, 5, 2, 3],
-            borderWidth: 1
+            label: 'Y-axis',
+            data: accelerometerGYAxisArray,
+            borderWidth: 1,
+            backgroundColor: 'rgb(118, 218, 118)'
         },        
         {
             label: 'Z-axis',
-            data: [23, 19, 3, 5, 2, 3],
-            borderWidth: 1
+            data: accelerometerGZAxisArray,
+            borderWidth: 1,
+            backgroundColor: 'rgb(125, 125, 235)'
+            
         }
     ]
     },
