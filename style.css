@@ -89,7 +89,9 @@ body {
 }
 .main-page {
     background-color: var(--dirty-white);
-    border-radius: 40px;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    
     padding: 30px;
     row-gap: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -191,3 +193,31 @@ body {
     background-color: rgb(167, 20, 20);
 }
 
+
+
+
+/* gyroscope and accelerometer datafields */
+
+#ax, #gx  {
+    color: rgb(252, 82, 82);
+}
+
+#gy, #ay {
+    
+    color: rgb(40, 223, 40);
+}
+#az, #gz {
+    color: rgb(52, 52, 248);
+    
+}
+
+#earthquakeState {
+    color: white;
+}
+
+
+.chart {
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}

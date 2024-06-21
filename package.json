@@ -1,0 +1,31 @@
+{
+  "name": "post-quake-fb",
+  "version": "1.0.0",
+  "description": "Codebase for a project under Electronics 1.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=development",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DakissCodes/post-quake.git"
+  },
+  "keywords": [
+    "postquake"
+  ],
+  "author": "justine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DakissCodes/post-quake/issues"
+  },
+  "homepage": "https://github.com/DakissCodes/post-quake#readme",
+  "dependencies": {
+    "firebase": "^10.12.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
+  }
+}

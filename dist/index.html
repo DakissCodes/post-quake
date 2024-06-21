@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@100;300;400;500;700;900&display=swap"
+    rel="stylesheet">
+    </head>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>`
+    <script defer src="bundle.js"></script>
+    <!-- <script defer type="module" src="../src/index.js"></script> -->
+</head>
+<body>
+    <div class="background-mask">
+        <div class="header flex-template-row">
+
+            <div class="info-btn">
+                <img src="../assets/person.svg" alt="">
+            </div>
+
+            
+            <div class="title">
+                <h1>postQuake</h1> 
+            </div>
+            
+            <div class="info-btn">
+                <img src="../assets/info.svg" alt="">
+            </div>
+        </div>  
+        
+        <div class="main-page flex-template-column">
+
+            <h2 class="eq-title">Earthquake Data</h2>
+            
+            <div class="front-card">
+               <div class="last-eq-state">
+                   <h4 class="yantramanav-light">Last Earthquake State</h4>
+                   <h1 class="yantramanav-black">Level <span id="earthquakeState">3</span></h1> 
+               </div> 
+            </div>
+            <div class="chart-container">
+
+                <div class="doughnut"></div>
+            </div>
+            
+            <div class="earthquake-data-container flex-template-column">
+                
+                
+                <div class="accelorometer flex-template-column">
+                    <h1 class=" data-header yantramanav-medium">Accelorometer</h1>
+
+                <div class="chart flex-template-column">
+                    <canvas id="accelerometerChart" width="300" height="300"> </canvas>
+                </div>
+                    <div class=" data-field-row flex-template-row">
+                        
+                        <div class="data-field-img-container">
+                            <img src="../assets/speed.svg" alt="speed">
+                        </div>
+                        <div class="data-field-section-container">
+                            <div class="flex-template-row data-field">
+                                <div class="data-title" >AX</div>
+                                <div class="data-value" id="ax">--</div>
+                            </div>
+
+                            <div class="flex-template-row data-field">
+                                <div class="data-title" >AY</div>
+                                <div class="data-value" id="ay">--</div>
+                            </div>
+
+                            <div class="flex-template-row data-field">
+                                <div class="data-title" >AZ</div>
+                                <div class="data-value" id="az">--</div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                    
+                </div>
+
+                
+                <div class="gyroscope flex-template-column">
+                    <h1 class="data-header yantramanav-medium">Gyroscope</h1>
+                    <div class="chart flex-template-column">
+                        <canvas id="gyroscopeChart" width="300" height="300"> </canvas>
+                    </div>
+                    <div class="data-field-row flex-template-row">
+                            <div class="data-field-img-container ">
+                                <img src="../assets/trending.svg" alt="trending">
+                            </div>
+                            <div class="data-field-section-container">
+                                <div class="flex-template-row data-field">
+                                    <div class="data-title" >GX</div>
+                                    <div class="data-value" id="gx">--</div>
+                                </div>
+                            
+                                <div class="flex-template-row data-field">
+                                    <div class="data-title" >GY</div>
+                                    <div class="data-value" id="gy">--</div>
+                                </div>
+                            
+                                <div class="flex-template-row data-field">
+                                    <div class="data-title" >GZ</div>
+                                    <div class="data-value" id="gz">--</div>
+                                </div>
+                        </div>
+
+                    </div>
+         
+
+                </div>
+            </div> 
+            
+
+            <div class="force-stop-container flex-template-column">
+
+                <button class="btn-template" id="stop-btn">
+                    FORCE STOP
+                </button>
+                <button class="btn-template" id="reset-btn">
+                    RESET
+                </button>
+            </div>
+            
+
+
+
+
+            
+        </div> 
+        
+    </div>
+    
+
+    
+</body>
+</html>
