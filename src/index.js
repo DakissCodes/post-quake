@@ -44,7 +44,7 @@ function createTimeStamp() {
     return formattedDateTime;
 
 }
-
+console.log('test branch here!')
 
 function fetchDataFromFirebase(referenceNode) {
     return new Promise((resolve, reject) => {
