@@ -1,0 +1,331 @@
+* {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    color: rgb(63, 63, 63);
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    /* border: 1px solid red; */
+}
+
+
+.lato-thin {
+    font-family: "Lato", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.lato-light {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.lato-regular {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.lato-bold {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.lato-black {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+.lato-thin-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+}
+
+.lato-light-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.lato-regular-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.lato-bold-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.lato-black-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+}
+
+
+
+
+:root {
+    --text-grey: #7F7F7F;
+    --text-white: antiquewhite;
+    --dark-blue: #112D4E;
+    --light-blue: #3F72AF;
+    --light-grey-blue: #DBE2EF;
+    --dirty-white: #F9F7F7;
+    
+}
+
+/* templates */
+
+.flex-template-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-template-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* containers */
+
+body {
+    padding: 0px;
+    
+}
+
+.info-btn {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    background-color: var(--dark-blue);
+    justify-content: space-between;
+    padding: 20px 30px 20px 30px;
+}
+.title h1{
+    color: white;
+    font-family: "Staatliches", sans-serif;
+    letter-spacing: 2px;
+}
+
+
+
+.eq-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.main-page {
+    
+    background-color: white;
+    /* border-top-right-radius: 30px;
+    border-top-left-radius: 30px; */
+    
+    padding: 0px 30px 20px 30px;
+    row-gap: 10px;
+}
+
+.front-card {
+    background-color: white;
+    border-radius: 7px; 
+    padding: 30px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.last-eq-state {
+    row-gap: 5px;
+}
+
+
+
+.data-field {
+    justify-content: space-between;
+
+}
+
+.earthquake-data-container {
+    margin-bottom: 30px;
+    row-gap: 12px;
+}
+
+.magnitude-data-field {
+    justify-content: space-between;
+}
+.magnitude {
+    margin-top: 20px;
+    row-gap: 10px;
+}
+.accelorometer, .gyroscope {
+    row-gap: 10px;
+
+    background-color: white; 
+    padding: 25px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 7px;
+}
+.data-field-section-container {
+    flex-grow: 1;
+}
+
+.data-field-title {
+    font-size: 16px;
+}
+
+
+.data-field-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7f7f7f56;
+    border-radius: 5px;
+    padding: 20px
+}
+
+img {
+    color: green;
+}
+
+.data-field-img-container img {
+    scale: 1.1
+}
+
+.data-header {
+    font-size: 18px;
+}
+
+.data-title, .data-value {
+    font-weight: 500;
+    color: var(--text-grey)
+}
+
+
+
+.data-field-row {
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.settings-panel {
+    padding: 20px;
+    row-gap: 15px;
+}
+
+.btn-template {
+    
+    padding: 15px 20px;
+    border-radius: 5px;
+    border: none;
+    
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+
+
+#stop-btn {
+    background-color: var(--dark-blue);
+    color: white;
+}
+
+#reset-btn {
+    
+    border: 2px solid var(--dark-blue);
+    
+    color: var(--dark-blue)
+}
+
+#reset-btn:hover {
+    background-color: rgb(224, 224, 224);
+}
+
+#stop-btn:hover {
+    
+    background-color: #121e2b;
+}
+
+#magnitude-reading {
+    color: rgb(199, 199, 17)
+}
+
+
+
+/* gyroscope and accelerometer datafields */
+
+#ax, #gx  {
+    color: rgb(235, 113, 113);
+}
+
+#gy, #ay {
+    
+    color: rgb(118, 218, 118);
+}
+#az, #gz {
+    color: rgb(125, 125, 235);
+    
+}
+
+
+
+.chart {
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.button-section-container {
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+
+}
+.nav-btn-container {
+    background-color: var(--dirty-white);
+    margin-bottom: 10px;
+    border-radius: 10px;
+    
+}
+.nav-btn-template {
+    margin-left: 0px;   
+    padding: 10px 20px 10px 20px;
+    width: 100px;
+    color: white;
+    background-color: var(--dirty-white);
+    font-weight: bold;
+
+    border: none;
+    border-radius: 10px;
+
+}
+.nav-btn-template, .button-bg-filler {
+    font-size: 12px;
+}
+
+.button-bg-filler {
+    background-color: var(--dark-blue);
+    border-radius: 10px;
+    width: 100px;
+    height: 36px;
+    position: absolute;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#homeBtn {
+    color: white;
+}
+
+
+#settingsBtn {
+    color: var(--dark-blue)
+}
+
