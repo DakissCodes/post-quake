@@ -5,27 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../style.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@100;300;400;500;700;900&display=swap"
-    rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
     </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Staatliches&display=swap"
+        rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>`
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="bundle.js"></script>
     <!-- <script defer type="module" src="../src/index.js"></script> -->
 </head>
 <body>
-    <div class="background-mask">
         <div class="header flex-template-row">
-
-            <div class="info-btn">
-                <img src="../assets/person.svg" alt="">
-            </div>
-
-            
             <div class="title">
-                <h1>postQuake</h1> 
+                <h1>LINDWALL</h1> 
             </div>
             
             <div class="info-btn">
@@ -33,34 +32,64 @@
             </div>
         </div>  
         
+        
         <div class="main-page flex-template-column">
-
-            <h2 class="eq-title">Earthquake Data</h2>
             
-            <div class="front-card">
-               <div class="last-eq-state">
-                   <h4 class="yantramanav-light">Last Earthquake State</h4>
-                   <h1 class="yantramanav-black">Level <span id="earthquakeState">3</span></h1> 
-               </div> 
-            </div>
-            <div class="chart-container">
-
-                <div class="doughnut"></div>
-            </div>
             
+            <div class="button-section-container flex-template-row">
+                <div class="nav-btn-container">
+                    <div class="button-bg-filler lato-bold" id="nav-btn-filler">Home</div>
+                    <button class="nav-btn-template lato-bold" id="homeBtn">Home</button>
+                    <button class="nav-btn-template lato-bold" id="settingsBtn">Settings</button>
+                </div>
+            </div>
+
             <div class="earthquake-data-container flex-template-column">
-                
-                
+ 
+
+            <div class="front-card">
+               <div class="last-eq-state flex-template-column">
+                   <h4 class="lato-regular">Last Earthquake State</h4>
+                   <h2 class="">Level <span id="earthquakeState">--</span></h2> 
+               </div> 
+
+                <div class="magnitude flex-template-column">
+
+                    <div class="chart">
+                        <canvas id="magnitude-line-chart" width="300" height="300"></canvas>
+                    </div>
+
+                    <div class=" data-field-row flex-template-row">
+                    
+                        <div class="data-field-section-container flex-template-row magnitude-data-field">
+                            <div>Magnitude</div>
+                            <div id="magnitude-reading">50</div>
+
+                    
+        
+
+                        </div>
+                    
+                    
+                    </div>
+
+                    
+                </div>
+               
+               
+            </div>
+
                 <div class="accelorometer flex-template-column">
-                    <h1 class=" data-header yantramanav-medium">Accelorometer</h1>
+                    <h1 class=" data-header lato-regular" >Accelorometer</h1>
 
                 <div class="chart flex-template-column">
                     <canvas id="accelerometerChart" width="300" height="300"> </canvas>
                 </div>
-                    <div class="yantramanav-light">Current Readings</div>
+                    <div class="data-field-title">Current Readings</div>
                     <div class=" data-field-row flex-template-row">
                         
                         <div class="data-field-img-container">
+                            
                             <img src="../assets/speed.svg" alt="speed">
                         </div>
                         <div class="data-field-section-container">
@@ -87,16 +116,16 @@
 
                 
                 <div class="gyroscope flex-template-column">
-                    <h1 class="data-header yantramanav-medium">Gyroscope</h1>
+                    <h1 class="data-header lato-regular">Gyroscope</h1>
                     <div class="chart flex-template-column">
                         <canvas id="gyroscopeChart" width="300" height="300"> </canvas>
                     </div>
-                    <div class="yantramanav-light">Current Readings</div>
+                    <div class="data-field-title">Current Readings</div>
                     <div class="data-field-row flex-template-row">
                             <div class="data-field-img-container ">
                                 <img src="../assets/trending.svg" alt="trending">
                             </div>
-                            <div class="data-field-section-container">
+                            <div class="data-field-section-container flex-template-column">
                                 <div class="flex-template-row data-field">
                                     <div class="data-title" >GX</div>
                                     <div class="data-value" id="gx">--</div>
@@ -120,16 +149,6 @@
             </div> 
             
 
-            <div class="force-stop-container flex-template-column">
-
-                <button class="btn-template" id="stop-btn">
-                    FORCE STOP
-                </button>
-                <button class="btn-template" id="reset-btn">
-                    RESET
-                </button>
-            </div>
-            
 
 
 
@@ -137,9 +156,16 @@
             
         </div> 
         
+    <div class="settings-panel flex-template-column">
+    
+        <button class="btn-template lato-bold" id="stop-btn">
+            Force Stop
+        </button>
+        <button class="btn-template lato-bold" id="reset-btn">
+            Reset
+        </button>
     </div>
-    
 
-    
+
 </body>
 </html>
