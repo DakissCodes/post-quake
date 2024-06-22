@@ -4,7 +4,8 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-import { getDatabase, ref, onValue, then} from 'firebase/database';
+import { getDatabase, ref, onValue, then, remove} from 'firebase/database';
+import { doc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -84,9 +85,9 @@ let accelerometerGYAxisArray = [-0.01, 0.03, 0.05, -0.01, -0.02, 0.03]
 let accelerometerGZAxisArray = [0.01, -0.02, 0.01, -0.03, 0.02, 0.01]
 
 // ACCELEROMETER DATA
-
-const accelerometerRef = ref(db, '/earthquakeData/accelerometer');
+const earthquakeDataRef = ref(db, '/quake');
 let accelerometerData
+
 const accelerometerXAxis = document.getElementById('ax');
 const accelerometerYAxis = document.getElementById('ay');
 const accelerometerZAxis = document.getElementById('az');
@@ -102,9 +103,9 @@ const accelerometerZAxis = document.getElementById('az');
 // Call the function to fetch data and use it
 // data in .then is testData
 // 
-onValue(accelerometerRef, (snapshot) => {
+onValue(earthquakeDataRef, (snapshot) => {
     if (snapshot.exists()) {
-        fetchDataFromFirebase(accelerometerRef).then((data) => {
+        fetchDataFromFirebase(earthquakeDataRef).then((data) => {
             // fetching accelerometer data
             console.log('accelerometer (data change)')
 
@@ -145,18 +146,17 @@ onValue(accelerometerRef, (snapshot) => {
 
 // GYROSCOPE DATA
 
-const gyroscopeRef = ref(db,'/earthquakeData/gyroscope')
 let gyroscopeData
 const gyroscopeXAxis = document.getElementById('gx')
 const gyroscopeYAxis = document.getElementById('gy')
 const gyroscopeZAxis = document.getElementById('gz')
 
 
-onValue(gyroscopeRef, (snapshot) => {
+onValue(earthquakeDataRef, (snapshot) => {
 
     if (snapshot.exists()) {
         console.log('gyroscope data changed!')
-        fetchDataFromFirebase(gyroscopeRef).then((data) => {
+        fetchDataFromFirebase(earthquakeDataRef).then((data) => {
             gyroscopeData = {
                 xAxis: data.gx,
                 yAxis: data.gy,
@@ -188,15 +188,71 @@ onValue(gyroscopeRef, (snapshot) => {
     
 })
 
+// last earthquake state
+
+const lastEarthquakeState = document.getElementById('earthquakeState');
+
+onValue(earthquakeDataRef, (snapshot) => {
+    if (snapshot.exists()) {
+        fetchDataFromFirebase(earthquakeDataRef).then((data) => {
+            
+
+            lastEarthquakeState.textContent = data.lastEarthquakeState;
+            
+        })
+
+    }
+    
+})
 
 
+let magnitudeArray = ["125.80759" ,"125.80147","125.87021","125.90817","125.77733"]
 
+const magnitudeReading = document.getElementById('magnitude-reading')
+
+
+onValue(earthquakeDataRef, (snapshot) => {
+    if (snapshot.exists()) {
+        fetchDataFromFirebase(earthquakeDataRef).then((data) => {
+            magnitudeReading.textContent = data.magnitude;
+            addElement(magnitudeArray, data.magnitude);
+        })
+    }
+})
 
 
 
 // chart 
 const accelerometerElement = document.getElementById('accelerometerChart')
 const gyroscopeElement = document.getElementById('gyroscopeChart')
+const magnitudeElement = document.getElementById('magnitude-line-chart');
+
+
+
+
+
+let magnitudeChart = new Chart(magnitudeElement, {
+    type: 'line',
+    data: {
+        labels: timeStamps,
+        datasets: [{
+            label: 'Magnitude (N)',
+            data: magnitudeArray,
+            borderWidth: 1,
+            backgroundColor: 'rgb(199, 199, 17)',
+
+        }
+        ]
+    },
+    options: {
+        scales: {
+            x: {
+                beginAtZero: false
+            }
+        }
+    },
+})
+
 
 let accelerometerChart = new Chart(accelerometerElement, {
     type: 'bar',
@@ -266,3 +322,203 @@ let gyroscopeChart = new Chart(gyroscopeElement, {
         }
     }
 });
+
+
+
+// button sections panel
+// 
+
+ const resetBtn = document.getElementById('reset-btn');
+
+ resetBtn.addEventListener('click', () => {
+    // magnitudeArray = []
+    console.log('reset button test....')
+    // magnitudeChart.update();l
+ })
+
+const homePanelBtn = document.getElementById('homeBtn');
+const settingsPanelBtn = document.getElementById('settingsBtn');
+const accelerometerCard = document.querySelector('.accelerometer');
+const gyroscopeCard = document.querySelector('.magnitude');
+const magnitudeCard = document.querySelector('.front-card');
+const earthquakeDataContainer = document.querySelector('.earthquake-data-container');
+const navBtnFiller = document.getElementById('nav-btn-filler');
+const settingsPanelContainer = document.querySelector('.settings-panel');
+const mainPage = document.querySelector('.main-page');
+// set as none
+
+
+let navPosition = 'home'
+homePanelBtn.addEventListener('click', () => {
+    if (navPosition == 'settings') {
+        reinsertChild(mainPage, earthquakeDataContainer)
+        console.log('clicked on home')
+        earthquakeDataContainer.animate([
+            // keyframes (transform states) 
+            // specify an array of states, from - to
+            {
+                transform: "translateX(-400px)",
+                opacity: 0.1
+            },
+            {
+                transform: "translateX(0)",
+                opacity: 1
+            }
+        ], {
+            // specify the duration and animation fill-mode
+            duration: 250,
+            fill: "forwards",
+            easing: "ease-in-out"
+            // delay: 5000
+
+        })
+
+        settingsPanelContainer.animate([
+
+            {
+                transform: "translateX(0)",
+                // opacity: 0.1
+            },
+            {
+                transform: "translateX( 400px)",
+                // opacity: 1
+            }
+        ], {
+            duration: 250,
+            fill: "forwards",
+            // delay: 5000
+            easing: "ease-in-out"
+        })
+        // settingsPanelContainer.style.display = 'none';
+         
+        removeChild(mainPage, settingsPanelContainer)
+        
+        navBtnFiller.animate([
+            {
+                transform: "translateX(100px)",
+                
+            },
+            {
+                transform: "translateX(0)",
+            }
+
+
+        ], {
+            duration: 150,
+            fill: 'forwards',
+            easing: "ease-in-out"
+        })
+        navBtnFiller.textContent = 'Home'
+        settingsPanelBtn.textContent = 'Settings'
+        
+
+        navPosition = 'home'
+        console.log(navPosition);
+        // earthquakeDataContainer.style.display = 'flex'
+        // 
+    }
+})
+settingsPanelBtn.addEventListener('click', () => {
+    // clicking on settings button
+    if (navPosition == 'home') {
+        console.log('clicked on settings')
+
+        // animate home panel
+        earthquakeDataContainer.animate([
+            // keyframes (transform states) 
+            // specify an array of states, from - to
+            {
+                transform: "translateX(0)",
+                // opacity: 0.1
+            },
+            {
+                transform: "translateX(-400px)",
+                // opacity: 1
+            }
+        ], {
+            // specify the duration and animation fill-mode
+            duration: 250,
+            fill: "forwards",
+            // delay: 5000
+            easing: "ease-in-out"
+
+        })
+        
+        
+        reinsertChild(mainPage, settingsPanelContainer)
+        // settingsPanelContainer.style.display = 'flex';
+        // animate settings panel
+
+        settingsPanelContainer.animate([
+            
+            {
+                transform: "translateX(400px)",
+                // opacity: 0.1
+            },
+            {
+                transform: "translateX(0)",
+                // opacity: 1
+            }
+        ],{
+            duration: 250,
+            fill: "forwards",
+            // delay: 5000
+            easing: "ease-in-out"
+        })
+
+        navBtnFiller.animate([
+            {
+                transform: "translateX(0)",
+            },
+            {
+                transform: "translateX(100px)",
+            }
+
+            
+        ],{
+            duration: 150,
+            fill: 'forwards',
+            easing: "ease-in-out"
+        })
+        
+        navBtnFiller.textContent = 'Settings'
+        
+        // settingsBtn.textContent = ''
+        homePanelBtn.style.color = '#112D4E'
+        navPosition = 'settings';
+        console.log(navPosition);
+        
+
+
+        setTimeout(removeChild(mainPage, earthquakeDataContainer), 2000) 
+
+        // 
+
+        
+    }
+    
+})
+
+function reinsertChild(parentNode, toBeRemoved) {
+    
+    parentNode.appendChild(toBeRemoved);
+}
+
+function removeChild(parentNode, toBeRemoved) {
+    parentNode.removeChild(toBeRemoved);
+    
+}
+
+
+
+
+
+
+
+console.log(magnitudeCard)
+// animations
+//animate method
+
+    
+
+
