@@ -205,7 +205,7 @@ onValue(earthquakeDataRef, (snapshot) => {
     
 })
 
-
+console.log('subtree commit test')
 let magnitudeArray = ["125.80759" ,"125.80147","125.87021","125.90817","125.77733"]
 
 const magnitudeReading = document.getElementById('magnitude-reading')
@@ -255,7 +255,7 @@ let magnitudeChart = new Chart(magnitudeElement, {
 
 
 let accelerometerChart = new Chart(accelerometerElement, {
-    type: 'bar',
+    type: 'line',
     data: {
         labels: timeStamps,
         datasets: [{
@@ -290,7 +290,7 @@ let accelerometerChart = new Chart(accelerometerElement, {
 
 
 let gyroscopeChart = new Chart(gyroscopeElement, {
-    type: 'bar',
+    type: 'line',
     data: {
         labels: timeStamps,
         datasets: [{

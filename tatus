@@ -1,0 +1,53 @@
+[33mcommit 209b828e9a1c86431214514c5512aaf4f02394d4[m[33m ([m[1;36mHEAD -> [m[1;32mtesting[m[33m)[m
+Author: Justine Dakiss <justinedaquis28@gmail.com>
+Date:   Sat Jun 22 18:44:24 2024 +0800
+
+    Initial dist subtree commit
+
+[33mcommit 7bacf4acc8e10112f1b9f4af358e180aeaebf312[m
+Author: Justine Dakiss <justinedaquis28@gmail.com>
+Date:   Sat Jun 22 18:40:49 2024 +0800
+
+    Initial dist subtree commit
+
+[33mcommit 47b2afc1d650f33d3383e6edd4f30b8916b82b21[m
+Author: Justine Dakiss <justinedaquis28@gmail.com>
+Date:   Sat Jun 22 18:33:15 2024 +0800
+
+    Initial dist subtree commit
+
+[33mcommit c08200e1f02370e491a92295f6d86d401ba226d9[m[33m ([m[1;31morigin/testing[m[33m)[m
+Author: Justine Dakiss <justinedaquis28@gmail.com>
+Date:   Sat Jun 22 18:17:36 2024 +0800
+
+    added line chart, animations, navbar
+
+[33mcommit 33ded7b1b0246562035a2bc2fdf23c37003b8277[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Justine Dakiss <justinedaquis28@gmail.com>
+Date:   Fri Jun 21 18:25:56 2024 +0800
+
+    added chart.js and sync with fb
+
+[33mcommit 2d51b3525d9eaa5b7ca6dad3dfbf2c5f318b0f02[m
+Author: Justine Dakiss <justinedaquis28@gmail.com>
+Date:   Fri Jun 21 17:21:47 2024 +0800
+
+    test commit
+
+[33mcommit dde523b8034265fe58fb56430fa4a205dd955f13[m
+Author: Justine Dakiss <justinedaquis28@gmail.com>
+Date:   Fri Jun 21 17:11:55 2024 +0800
+
+    added firebase db integration
+
+[33mcommit 47a793b541f7bc75b2cf1aa1ea694212fd181f10[m
+Author: Justine Dakiss <justinedaquis28@gmail.com>
+Date:   Fri Jun 14 02:04:23 2024 +0800
+
+    main display
+
+[33mcommit abd329eb0de164b68c2744dee9439cefe5167d25[m
+Author: dadada <93424880+DakissCodes@users.noreply.github.com>
+Date:   Fri Jun 14 01:30:54 2024 +0800
+
+    Initial commit
